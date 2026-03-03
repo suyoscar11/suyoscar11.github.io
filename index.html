@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StatusGuard — Your Bureaucratic Bodyguard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
   <style>
     /* ─── Reset & Base ──────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy:   #05070f;
-      --dark:   #0b0f1e;
-      --card:   #111527;
-      --border: rgba(99,120,255,.18);
-      --blue:   #4f6cff;
-      --cyan:   #00d4ff;
-      --purple: #8b5cf6;
-      --green:  #22d3a5;
-      --red:    #ff4e6a;
-      --text:   #e4e9f5;
-      --muted:  #7b87a8;
-      --glow:   0 0 60px rgba(79,108,255,.35);
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    html { scroll-behavior: smooth; }
+
+    :root {
+      --navy: #05070f;
+      --dark: #0b0f1e;
+      --card: #111527;
+      --border: rgba(99, 120, 255, .18);
+      --blue: #4f6cff;
+      --cyan: #00d4ff;
+      --purple: #8b5cf6;
+      --green: #22d3a5;
+      --red: #ff4e6a;
+      --text: #e4e9f5;
+      --muted: #7b87a8;
+      --glow: 0 0 60px rgba(79, 108, 255, .35);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: var(--navy);
@@ -33,51 +47,169 @@
     }
 
     /* ─── Scrollbar ─────────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--dark); }
-    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--blue);
+      border-radius: 3px;
+    }
 
     /* ─── Utility ───────────────────────────────────────────── */
-    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
     .gradient-text {
       background: linear-gradient(135deg, var(--blue), var(--cyan));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
     .gradient-text-purple {
       background: linear-gradient(135deg, var(--purple), var(--blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
     .tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 14px; border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 99px;
       border: 1px solid var(--border);
-      background: rgba(79,108,255,.08);
-      font-size: .72rem; font-weight: 600; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--cyan);
+      background: rgba(79, 108, 255, .08);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--cyan);
     }
 
     /* ─── Animations ────────────────────────────────────────── */
-    @keyframes fadeUp   { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
-    @keyframes floatY   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
-    @keyframes pulse    { 0%,100%{opacity:.6} 50%{opacity:1} }
-    @keyframes spin     { to { transform: rotate(360deg); } }
-    @keyframes beam     { 0%{transform:translateX(-100%) rotate(45deg)} 100%{transform:translateX(300%) rotate(45deg)} }
-    @keyframes glow     { 0%,100%{box-shadow:0 0 20px rgba(79,108,255,.3)} 50%{box-shadow:0 0 60px rgba(79,108,255,.7)} }
-    @keyframes scanline { 0%{top:-10%} 100%{top:110%} }
-    @keyframes ticker   { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    @keyframes ripple   { to{transform:scale(2.5);opacity:0} }
-    @keyframes dash     { to{stroke-dashoffset:0} }
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes floatY {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-14px)
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: .6
+      }
+
+      50% {
+        opacity: 1
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes beam {
+      0% {
+        transform: translateX(-100%) rotate(45deg)
+      }
+
+      100% {
+        transform: translateX(300%) rotate(45deg)
+      }
+    }
+
+    @keyframes glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(79, 108, 255, .3)
+      }
+
+      50% {
+        box-shadow: 0 0 60px rgba(79, 108, 255, .7)
+      }
+    }
+
+    @keyframes scanline {
+      0% {
+        top: -10%
+      }
+
+      100% {
+        top: 110%
+      }
+    }
+
+    @keyframes ticker {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(2.5);
+        opacity: 0
+      }
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 0
+      }
+    }
 
     .reveal {
       opacity: 0;
       transform: translateY(40px);
       transition: opacity .7s ease, transform .7s ease;
     }
+
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
@@ -85,123 +217,232 @@
 
     /* ─── NAV ───────────────────────────────────────────────── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
       padding: 18px 0;
-      background: rgba(5,7,15,.7);
+      background: rgba(5, 7, 15, .7);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
       transition: padding .3s;
     }
-    nav.scrolled { padding: 12px 0; }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
+
+    nav.scrolled {
+      padding: 12px 0;
     }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .logo {
-      display: flex; align-items: center; gap: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700; font-size: 1.25rem; color: #fff;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #fff;
       text-decoration: none;
     }
+
     .logo-icon {
-      width: 34px; height: 34px;
+      width: 34px;
+      height: 34px;
       background: linear-gradient(135deg, var(--blue), var(--purple));
       border-radius: 9px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1rem;
       animation: glow 3s ease-in-out infinite;
     }
+
     .nav-links {
-      display: flex; align-items: center; gap: 36px; list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
     }
+
     .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: .88rem;
-      font-weight: 500; transition: color .2s;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 500;
+      transition: color .2s;
     }
-    .nav-links a:hover { color: #fff; }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
     .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 22px; border-radius: 10px;
-      font-weight: 600; font-size: .88rem; cursor: pointer;
-      text-decoration: none; border: none; transition: all .25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: .88rem;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: all .25s;
     }
+
     .btn-primary {
       background: linear-gradient(135deg, var(--blue), #6a5aff);
       color: #fff;
-      box-shadow: 0 4px 20px rgba(79,108,255,.4);
+      box-shadow: 0 4px 20px rgba(79, 108, 255, .4);
     }
+
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(79,108,255,.6);
+      box-shadow: 0 8px 30px rgba(79, 108, 255, .6);
     }
+
     .btn-ghost {
-      background: transparent; color: var(--text);
+      background: transparent;
+      color: var(--text);
       border: 1px solid var(--border);
     }
-    .btn-ghost:hover { border-color: var(--blue); color: var(--blue); background: rgba(79,108,255,.06); }
+
+    .btn-ghost:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: rgba(79, 108, 255, .06);
+    }
 
     /* ─── HERO ──────────────────────────────────────────────── */
     #hero {
       min-height: 100vh;
-      display: flex; align-items: center;
-      position: relative; overflow: hidden;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
       padding-top: 90px;
     }
+
     .hero-bg {
-      position: absolute; inset: 0; pointer-events: none;
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
     }
+
     .hero-orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(80px); opacity: .35;
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .35;
     }
-    .orb-1 { width:600px;height:600px;top:-120px;left:-200px;background:radial-gradient(circle,var(--blue),transparent); animation:floatY 8s ease-in-out infinite; }
-    .orb-2 { width:500px;height:500px;bottom:-100px;right:-150px;background:radial-gradient(circle,var(--purple),transparent); animation:floatY 10s ease-in-out infinite reverse; }
-    .orb-3 { width:300px;height:300px;top:40%;left:50%;background:radial-gradient(circle,var(--cyan),transparent); animation:floatY 6s ease-in-out infinite 2s; }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      top: -120px;
+      left: -200px;
+      background: radial-gradient(circle, var(--blue), transparent);
+      animation: floatY 8s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      bottom: -100px;
+      right: -150px;
+      background: radial-gradient(circle, var(--purple), transparent);
+      animation: floatY 10s ease-in-out infinite reverse;
+    }
+
+    .orb-3 {
+      width: 300px;
+      height: 300px;
+      top: 40%;
+      left: 50%;
+      background: radial-gradient(circle, var(--cyan), transparent);
+      animation: floatY 6s ease-in-out infinite 2s;
+    }
 
     /* Grid overlay */
     .hero-grid {
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       background-image:
-        linear-gradient(rgba(79,108,255,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(79,108,255,.06) 1px, transparent 1px);
+        linear-gradient(rgba(79, 108, 255, .06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79, 108, 255, .06) 1px, transparent 1px);
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
     }
 
     .hero-content {
-      position: relative; z-index: 2;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
     }
-    .hero-text .tag { margin-bottom: 24px; animation: fadeIn .6s ease both; }
+
+    .hero-text .tag {
+      margin-bottom: 24px;
+      animation: fadeIn .6s ease both;
+    }
+
     .hero-h1 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 800; line-height: 1.1;
+      font-weight: 800;
+      line-height: 1.1;
       margin-bottom: 22px;
       animation: fadeUp .8s ease .1s both;
     }
+
     .hero-sub {
-      font-size: 1.05rem; color: var(--muted); max-width: 440px;
-      margin-bottom: 36px; line-height: 1.75;
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 440px;
+      margin-bottom: 36px;
+      line-height: 1.75;
       animation: fadeUp .8s ease .2s both;
     }
+
     .hero-actions {
-      display: flex; gap: 14px; flex-wrap: wrap;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
       animation: fadeUp .8s ease .3s both;
     }
+
     .hero-stats {
-      display: flex; gap: 32px; margin-top: 48px;
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
       animation: fadeUp .8s ease .4s both;
     }
+
     .hero-stat strong {
-      display: block; font-size: 1.75rem; font-weight: 800;
+      display: block;
+      font-size: 1.75rem;
+      font-weight: 800;
       font-family: 'Space Grotesk', sans-serif;
     }
-    .hero-stat span { font-size: .8rem; color: var(--muted); }
+
+    .hero-stat span {
+      font-size: .8rem;
+      color: var(--muted);
+    }
 
     /* Dashboard mockup */
     .hero-visual {
-      position: relative; animation: fadeIn 1s ease .3s both;
+      position: relative;
+      animation: fadeIn 1s ease .3s both;
     }
+
     .dashboard-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -209,390 +450,993 @@
       padding: 24px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0,0,0,.5), var(--glow);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .5), var(--glow);
       animation: floatY 6s ease-in-out infinite;
     }
+
     .dashboard-card::before {
       content: '';
-      position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.04), transparent);
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .04), transparent);
       animation: beam 4s ease-in-out infinite;
     }
+
     .dash-header {
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 20px;
     }
-    .dash-title { font-size: .8rem; font-weight: 600; color: var(--muted); }
-    .status-badge {
-      padding: 4px 12px; border-radius: 99px; font-size: .72rem; font-weight: 700;
+
+    .dash-title {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--muted);
     }
-    .status-green { background: rgba(34,211,165,.15); color: var(--green); }
-    .status-yellow { background: rgba(255,186,0,.15); color: #ffba00; }
-    .status-red { background: rgba(255,78,106,.15); color: var(--red); }
+
+    .status-badge {
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
+    .status-green {
+      background: rgba(34, 211, 165, .15);
+      color: var(--green);
+    }
+
+    .status-yellow {
+      background: rgba(255, 186, 0, .15);
+      color: #ffba00;
+    }
+
+    .status-red {
+      background: rgba(255, 78, 106, .15);
+      color: var(--red);
+    }
 
     .risk-score {
-      text-align: center; margin: 8px 0 24px;
+      text-align: center;
+      margin: 8px 0 24px;
     }
+
     .risk-ring {
-      position: relative; width: 120px; height: 120px; margin: 0 auto 12px;
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 12px;
     }
-    .risk-ring svg { transform: rotate(-90deg); }
-    .risk-ring-track { stroke: rgba(255,255,255,.06); fill: none; stroke-width: 8; }
+
+    .risk-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .risk-ring-track {
+      stroke: rgba(255, 255, 255, .06);
+      fill: none;
+      stroke-width: 8;
+    }
+
     .risk-ring-fill {
-      stroke: url(#ringGrad); fill: none; stroke-width: 8;
+      stroke: url(#ringGrad);
+      fill: none;
+      stroke-width: 8;
       stroke-linecap: round;
       stroke-dasharray: 314;
       stroke-dashoffset: 60;
       animation: dash 1.5s ease .8s both;
     }
-    .risk-number {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-    }
-    .risk-number strong { font-size: 1.8rem; font-weight: 800; font-family: 'Space Grotesk',sans-serif; }
-    .risk-number span { font-size: .65rem; color: var(--muted); }
-    .risk-label { font-size: .78rem; color: var(--muted); }
 
-    .dash-items { display: flex; flex-direction: column; gap: 10px; }
+    .risk-number {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .risk-number strong {
+      font-size: 1.8rem;
+      font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .risk-number span {
+      font-size: .65rem;
+      color: var(--muted);
+    }
+
+    .risk-label {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .dash-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .dash-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 12px; border-radius: 10px;
-      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.05);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .05);
       font-size: .8rem;
     }
-    .dash-icon {
-      width: 30px; height: 30px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .85rem; flex-shrink: 0;
-    }
-    .dash-item-text { flex: 1; }
-    .dash-item-text small { display: block; color: var(--muted); font-size: .7rem; }
 
-    .mini-bar { height: 4px; border-radius: 2px; background: rgba(255,255,255,.06); margin-top: 4px; overflow: hidden; }
-    .mini-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+    .dash-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      flex-shrink: 0;
+    }
+
+    .dash-item-text {
+      flex: 1;
+    }
+
+    .dash-item-text small {
+      display: block;
+      color: var(--muted);
+      font-size: .7rem;
+    }
+
+    .mini-bar {
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, .06);
+      margin-top: 4px;
+      overflow: hidden;
+    }
+
+    .mini-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+    }
 
     /* floating alert card */
     .alert-float {
-      position: absolute; bottom: -16px; left: -32px;
+      position: absolute;
+      bottom: -16px;
+      left: -32px;
       background: var(--card);
-      border: 1px solid rgba(255,186,0,.3);
-      border-radius: 14px; padding: 12px 16px;
+      border: 1px solid rgba(255, 186, 0, .3);
+      border-radius: 14px;
+      padding: 12px 16px;
       width: 220px;
-      box-shadow: 0 16px 40px rgba(0,0,0,.4);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .4);
       animation: floatY 5s ease-in-out infinite 1s;
       font-size: .78rem;
     }
-    .alert-float .alert-icon { font-size: 1.1rem; margin-bottom: 4px; }
-    .alert-float .alert-title { font-weight: 700; color: #ffba00; }
-    .alert-float .alert-sub { color: var(--muted); margin-top: 2px; }
+
+    .alert-float .alert-icon {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .alert-float .alert-title {
+      font-weight: 700;
+      color: #ffba00;
+    }
+
+    .alert-float .alert-sub {
+      color: var(--muted);
+      margin-top: 2px;
+    }
 
     .stats-float {
-      position: absolute; top: -20px; right: -24px;
+      position: absolute;
+      top: -20px;
+      right: -24px;
       background: var(--card);
-      border: 1px solid rgba(34,211,165,.3);
-      border-radius: 14px; padding: 12px 16px;
-      box-shadow: 0 16px 40px rgba(0,0,0,.4);
+      border: 1px solid rgba(34, 211, 165, .3);
+      border-radius: 14px;
+      padding: 12px 16px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .4);
       animation: floatY 7s ease-in-out infinite .5s;
-      font-size: .78rem; min-width: 140px;
+      font-size: .78rem;
+      min-width: 140px;
     }
-    .stats-float .sf-label { color: var(--muted); font-size: .7rem; }
-    .stats-float .sf-value { font-size: 1.3rem; font-weight: 800; color: var(--green); font-family: 'Space Grotesk',sans-serif; }
+
+    .stats-float .sf-label {
+      color: var(--muted);
+      font-size: .7rem;
+    }
+
+    .stats-float .sf-value {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--green);
+      font-family: 'Space Grotesk', sans-serif;
+    }
 
     /* ─── TICKER ────────────────────────────────────────────── */
     .ticker-wrap {
-      background: rgba(79,108,255,.06);
+      background: rgba(79, 108, 255, .06);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 12px 0; overflow: hidden;
+      padding: 12px 0;
+      overflow: hidden;
     }
+
     .ticker-track {
-      display: flex; gap: 64px; width: max-content;
+      display: flex;
+      gap: 64px;
+      width: max-content;
       animation: ticker 30s linear infinite;
     }
+
     .ticker-item {
-      display: flex; align-items: center; gap: 10px;
-      font-size: .82rem; color: var(--muted); white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .82rem;
+      color: var(--muted);
+      white-space: nowrap;
     }
-    .ticker-item .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); animation: pulse 2s infinite; }
+
+    .ticker-item .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: pulse 2s infinite;
+    }
 
     /* ─── SECTION BASE ──────────────────────────────────────── */
-    section { padding: 110px 0; }
-    .section-tag { margin-bottom: 16px; }
+    section {
+      padding: 110px 0;
+    }
+
+    .section-tag {
+      margin-bottom: 16px;
+    }
+
     .section-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 800; line-height: 1.15; margin-bottom: 16px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
     }
+
     .section-sub {
-      color: var(--muted); font-size: 1.05rem; max-width: 560px; line-height: 1.75;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      line-height: 1.75;
     }
-    .section-header { margin-bottom: 64px; }
-    .section-header.center { text-align: center; }
-    .section-header.center .section-sub { margin: 0 auto; }
+
+    .section-header {
+      margin-bottom: 64px;
+    }
+
+    .section-header.center {
+      text-align: center;
+    }
+
+    .section-header.center .section-sub {
+      margin: 0 auto;
+    }
 
     /* ─── PROBLEM SECTION ───────────────────────────────────── */
     #problem {
       background: linear-gradient(180deg, var(--navy) 0%, var(--dark) 100%);
     }
+
     .problem-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
     }
-    .problem-cards { display: flex; flex-direction: column; gap: 16px; }
+
+    .problem-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     .problem-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px; padding: 20px 22px;
-      display: flex; gap: 16px; align-items: flex-start;
+      border-radius: 16px;
+      padding: 20px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
       transition: border-color .3s, transform .3s;
       cursor: default;
     }
-    .problem-card:hover { border-color: var(--blue); transform: translateX(6px); }
+
+    .problem-card:hover {
+      border-color: var(--blue);
+      transform: translateX(6px);
+    }
+
     .problem-card .p-icon {
-      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.1rem;
     }
-    .problem-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
-    .problem-card p { font-size: .82rem; color: var(--muted); line-height: 1.6; }
 
-    .problem-visual { position: relative; }
+    .problem-card h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .problem-card p {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .problem-visual {
+      position: relative;
+    }
+
     .timeline {
-      position: relative; padding-left: 32px;
+      position: relative;
+      padding-left: 32px;
     }
+
     .timeline::before {
-      content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
-      width: 2px; background: linear-gradient(180deg, var(--blue), var(--purple), transparent);
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--blue), var(--purple), transparent);
     }
+
     .timeline-item {
-      position: relative; margin-bottom: 28px;
+      position: relative;
+      margin-bottom: 28px;
     }
+
     .timeline-dot {
-      position: absolute; left: -27px; top: 5px;
-      width: 14px; height: 14px; border-radius: 50%;
-      border: 2px solid var(--blue); background: var(--navy);
-      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      left: -27px;
+      top: 5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--blue);
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .timeline-dot::after {
-      content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: var(--blue); animation: pulse 2s infinite;
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: pulse 2s infinite;
     }
-    .timeline-item h4 { font-size: .9rem; font-weight: 700; margin-bottom: 4px; }
-    .timeline-item p { font-size: .8rem; color: var(--muted); }
+
+    .timeline-item h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item p {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
     .timeline-item .t-meta {
-      font-size: .7rem; color: var(--red); font-weight: 600;
+      font-size: .7rem;
+      color: var(--red);
+      font-weight: 600;
       margin-top: 4px;
     }
 
     /* ─── FEATURES SECTION ──────────────────────────────────── */
-    #features { background: var(--dark); }
-    .features-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+    #features {
+      background: var(--dark);
     }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
     .feat-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 20px; padding: 30px;
-      position: relative; overflow: hidden;
-      transition: all .3s; cursor: default;
+      border-radius: 20px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: all .3s;
+      cursor: default;
     }
+
     .feat-card::before {
       content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(79,108,255,.05), transparent);
-      opacity: 0; transition: opacity .3s;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(79, 108, 255, .05), transparent);
+      opacity: 0;
+      transition: opacity .3s;
     }
-    .feat-card:hover { border-color: rgba(79,108,255,.4); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,.3), var(--glow); }
-    .feat-card:hover::before { opacity: 1; }
+
+    .feat-card:hover {
+      border-color: rgba(79, 108, 255, .4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .3), var(--glow);
+    }
+
+    .feat-card:hover::before {
+      opacity: 1;
+    }
+
     .feat-icon {
-      width: 52px; height: 52px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; margin-bottom: 20px;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
     }
-    .feat-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
-    .feat-card p { font-size: .85rem; color: var(--muted); line-height: 1.7; }
+
+    .feat-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .feat-card p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
     .feat-tag {
-      display: inline-block; margin-top: 16px;
-      padding: 3px 10px; border-radius: 99px;
-      font-size: .68rem; font-weight: 700;
-      background: rgba(79,108,255,.12); color: var(--blue);
+      display: inline-block;
+      margin-top: 16px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: .68rem;
+      font-weight: 700;
+      background: rgba(79, 108, 255, .12);
+      color: var(--blue);
+    }
+
+    /* ─── AI MONITORING ──────────────────────────────────────── */
+    #ai-monitoring {
+      background: linear-gradient(180deg, var(--dark) 0%, var(--navy) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ai-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+      margin-bottom: 48px;
+    }
+
+    .ai-flow::before {
+      content: '';
+      position: absolute;
+      top: 60px;
+      left: calc(12.5%);
+      right: calc(12.5%);
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--purple), var(--green));
+      z-index: 0;
+    }
+
+    .ai-step {
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ai-step-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      border: 3px solid var(--border);
+      background: var(--card);
+      position: relative;
+      transition: all 0.4s;
+    }
+
+    .ai-step:hover .ai-step-icon {
+      border-color: var(--blue);
+      box-shadow: 0 0 40px rgba(79, 108, 255, 0.5);
+      transform: scale(1.08);
+    }
+
+    .ai-step-icon::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: -1;
+    }
+
+    .ai-step:hover .ai-step-icon::before {
+      opacity: 0.15;
+    }
+
+    .ai-step h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .ai-step p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .ai-step-num {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .ai-highlight-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ai-highlight-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(79, 108, 255, 0.05));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .ai-highlight-box:hover::before {
+      opacity: 1;
     }
 
     /* ─── HOW IT WORKS ──────────────────────────────────────── */
-    #howitworks { background: var(--navy); }
+    #howitworks {
+      background: var(--navy);
+    }
+
     .steps-grid {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
       position: relative;
     }
+
     .steps-grid::before {
-      content: ''; position: absolute;
-      top: 38px; left: calc(12.5%); right: calc(12.5%);
+      content: '';
+      position: absolute;
+      top: 38px;
+      left: calc(12.5%);
+      right: calc(12.5%);
       height: 2px;
       background: linear-gradient(90deg, var(--blue), var(--purple), var(--cyan));
     }
+
     .step {
-      text-align: center; padding: 0 16px;
+      text-align: center;
+      padding: 0 16px;
     }
+
     .step-num {
-      width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 24px;
-      display: flex; align-items: center; justify-content: center;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.3rem;
       border: 2px solid var(--border);
       background: var(--card);
-      position: relative; z-index: 1;
+      position: relative;
+      z-index: 1;
       transition: all .3s;
     }
+
     .step:hover .step-num {
       border-color: var(--blue);
-      box-shadow: 0 0 30px rgba(79,108,255,.4);
+      box-shadow: 0 0 30px rgba(79, 108, 255, .4);
     }
-    .step h4 { font-size: .95rem; font-weight: 700; margin-bottom: 8px; }
-    .step p { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+
+    .step h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
 
     /* ─── STATS SECTION ─────────────────────────────────────── */
     #stats {
-      background: linear-gradient(135deg, rgba(79,108,255,.08) 0%, rgba(139,92,246,.08) 100%);
+      background: linear-gradient(135deg, rgba(79, 108, 255, .08) 0%, rgba(139, 92, 246, .08) 100%);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       padding: 80px 0;
     }
+
     .stats-grid {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
       text-align: center;
     }
+
     .stat-item .stat-number {
-      font-size: 3rem; font-weight: 900;
+      font-size: 3rem;
+      font-weight: 900;
       font-family: 'Space Grotesk', sans-serif;
       line-height: 1;
       background: linear-gradient(135deg, var(--blue), var(--cyan));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 8px;
     }
-    .stat-item p { font-size: .88rem; color: var(--muted); }
+
+    .stat-item p {
+      font-size: .88rem;
+      color: var(--muted);
+    }
 
     /* ─── COMPARISON TABLE ──────────────────────────────────── */
-    #compare { background: var(--dark); }
+    #compare {
+      background: var(--dark);
+    }
+
     .compare-wrap {
       overflow-x: auto;
     }
+
     .compare-table {
-      width: 100%; border-collapse: collapse; min-width: 640px;
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
     }
+
     .compare-table th {
-      padding: 16px 20px; text-align: left;
-      font-size: .78rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .08em;
+      padding: 16px 20px;
+      text-align: left;
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
       color: var(--muted);
       border-bottom: 1px solid var(--border);
     }
+
     .compare-table th.highlight {
-      background: rgba(79,108,255,.08);
+      background: rgba(79, 108, 255, .08);
       color: var(--blue);
       border-radius: 8px 8px 0 0;
     }
+
     .compare-table td {
-      padding: 14px 20px; font-size: .88rem;
-      border-bottom: 1px solid rgba(255,255,255,.04);
+      padding: 14px 20px;
+      font-size: .88rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
     }
-    .compare-table td.highlight { background: rgba(79,108,255,.05); }
-    .compare-table tr:hover td { background: rgba(255,255,255,.02); }
-    .compare-table tr:hover td.highlight { background: rgba(79,108,255,.1); }
-    .check { color: var(--green); font-size: 1rem; }
-    .cross { color: var(--red); font-size: 1rem; }
-    .partial { color: #ffba00; font-size: .85rem; }
+
+    .compare-table td.highlight {
+      background: rgba(79, 108, 255, .05);
+    }
+
+    .compare-table tr:hover td {
+      background: rgba(255, 255, 255, .02);
+    }
+
+    .compare-table tr:hover td.highlight {
+      background: rgba(79, 108, 255, .1);
+    }
+
+    .check {
+      color: var(--green);
+      font-size: 1rem;
+    }
+
+    .cross {
+      color: var(--red);
+      font-size: 1rem;
+    }
+
+    .partial {
+      color: #ffba00;
+      font-size: .85rem;
+    }
 
     /* ─── PRICING ───────────────────────────────────────────── */
-    #pricing { background: var(--navy); }
-    .pricing-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
-      max-width: 960px; margin: 0 auto;
+    #pricing {
+      background: var(--navy);
     }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
     .price-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 22px; padding: 34px 28px;
-      position: relative; overflow: hidden;
+      border-radius: 22px;
+      padding: 34px 28px;
+      position: relative;
+      overflow: hidden;
       transition: transform .3s, box-shadow .3s;
     }
-    .price-card:hover { transform: translateY(-8px); }
+
+    .price-card:hover {
+      transform: translateY(-8px);
+    }
+
     .price-card.popular {
       border-color: var(--blue);
       box-shadow: 0 0 0 1px var(--blue), var(--glow);
     }
+
     .popular-badge {
-      position: absolute; top: 20px; right: 20px;
-      padding: 4px 12px; border-radius: 99px;
-      font-size: .68rem; font-weight: 800;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: .68rem;
+      font-weight: 800;
       background: linear-gradient(135deg, var(--blue), var(--purple));
       color: #fff;
     }
-    .price-name { font-size: .82rem; font-weight: 700; color: var(--muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: .08em; }
+
+    .price-name {
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
     .price-amount {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.8rem; font-weight: 800; line-height: 1; margin-bottom: 6px;
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
     }
-    .price-period { font-size: .82rem; color: var(--muted); margin-bottom: 28px; }
-    .price-features { list-style: none; margin-bottom: 30px; }
+
+    .price-period {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .price-features {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
     .price-features li {
-      padding: 9px 0; font-size: .88rem;
-      border-bottom: 1px solid rgba(255,255,255,.04);
-      display: flex; gap: 10px; align-items: flex-start;
+      padding: 9px 0;
+      font-size: .88rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
     }
-    .price-features li:last-child { border-bottom: none; }
-    .btn-full { width: 100%; justify-content: center; }
+
+    .price-features li:last-child {
+      border-bottom: none;
+    }
+
+    .btn-full {
+      width: 100%;
+      justify-content: center;
+    }
 
     /* ─── TESTIMONIALS ──────────────────────────────────────── */
-    #testimonials { background: var(--dark); }
-    .t-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+    #testimonials {
+      background: var(--dark);
     }
+
+    .t-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
     .t-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 18px; padding: 26px;
-      position: relative; overflow: hidden;
+      border-radius: 18px;
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
       transition: transform .3s, border-color .3s;
     }
-    .t-card:hover { transform: translateY(-4px); border-color: rgba(79,108,255,.35); }
+
+    .t-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(79, 108, 255, .35);
+    }
+
     .t-card::before {
-      content: '"'; position: absolute;
-      top: 10px; right: 20px; font-size: 4rem;
-      color: rgba(79,108,255,.12); font-family: Georgia, serif;
+      content: '"';
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 4rem;
+      color: rgba(79, 108, 255, .12);
+      font-family: Georgia, serif;
       line-height: 1;
     }
-    .t-text { font-size: .88rem; color: var(--text); line-height: 1.75; margin-bottom: 20px; }
-    .t-author { display: flex; align-items: center; gap: 12px; }
+
+    .t-text {
+      font-size: .88rem;
+      color: var(--text);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .t-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .t-avatar {
-      width: 40px; height: 40px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; font-weight: 700;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
       background: linear-gradient(135deg, var(--blue), var(--purple));
     }
-    .t-name { font-size: .88rem; font-weight: 700; }
-    .t-role { font-size: .75rem; color: var(--muted); }
-    .stars { color: #ffba00; font-size: .8rem; margin-bottom: 14px; }
+
+    .t-name {
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .t-role {
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    .stars {
+      color: #ffba00;
+      font-size: .8rem;
+      margin-bottom: 14px;
+    }
 
     /* ─── CTA ───────────────────────────────────────────────── */
     #cta {
       background: var(--navy);
       padding: 140px 0;
       text-align: center;
-      position: relative; overflow: hidden;
+      position: relative;
+      overflow: hidden;
     }
+
     .cta-orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(100px); opacity: .25; pointer-events: none;
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .25;
+      pointer-events: none;
     }
-    .cta-orb-1 { width:500px;height:500px;top:-100px;left:50%;transform:translateX(-50%);background:var(--blue); }
-    .cta-orb-2 { width:300px;height:300px;bottom:-50px;left:20%;background:var(--purple); }
-    .cta-inner { position: relative; z-index: 2; }
+
+    .cta-orb-1 {
+      width: 500px;
+      height: 500px;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue);
+    }
+
+    .cta-orb-2 {
+      width: 300px;
+      height: 300px;
+      bottom: -50px;
+      left: 20%;
+      background: var(--purple);
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+    }
+
     .cta-inner h2 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
       margin-bottom: 18px;
     }
-    .cta-inner p { color: var(--muted); font-size: 1.05rem; margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; }
-    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .cta-inner p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
     /* ─── FOOTER ────────────────────────────────────────────── */
     footer {
@@ -600,811 +1444,1353 @@
       border-top: 1px solid var(--border);
       padding: 60px 0 36px;
     }
+
     .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
       margin-bottom: 48px;
     }
-    .footer-brand p { color: var(--muted); font-size: .85rem; margin-top: 14px; line-height: 1.7; }
-    .footer-col h5 { font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px; color: var(--muted); }
-    .footer-col a {
-      display: block; color: var(--text); text-decoration: none;
-      font-size: .85rem; margin-bottom: 10px; transition: color .2s;
+
+    .footer-brand p {
+      color: var(--muted);
+      font-size: .85rem;
+      margin-top: 14px;
+      line-height: 1.7;
     }
-    .footer-col a:hover { color: var(--blue); }
+
+    .footer-col h5 {
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 16px;
+      color: var(--muted);
+    }
+
+    .footer-col a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      font-size: .85rem;
+      margin-bottom: 10px;
+      transition: color .2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--blue);
+    }
+
     .footer-bottom {
-      border-top: 1px solid var(--border); padding-top: 28px;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: .8rem; color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .8rem;
+      color: var(--muted);
     }
 
     /* ─── Ripple Button Effect ──────────────────────────────── */
-    .btn { position: relative; overflow: hidden; }
+    .btn {
+      position: relative;
+      overflow: hidden;
+    }
+
     .ripple-effect {
-      position: absolute; border-radius: 50%;
-      width: 80px; height: 80px;
-      background: rgba(255,255,255,.15);
+      position: absolute;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, .15);
       transform: scale(0);
       animation: ripple .5s ease-out;
       pointer-events: none;
     }
 
+    /* ─── FAQ ───────────────────────────────────────────────── */
+    #faq {
+      background: var(--dark);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all .3s;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(79, 108, 255, .4);
+    }
+
+    .faq-item.active {
+      border-color: var(--blue);
+      background: rgba(79, 108, 255, .05);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .faq-question h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: rgba(79, 108, 255, .12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      color: var(--blue);
+      flex-shrink: 0;
+      transition: transform .3s;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease, margin-top .3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      margin-top: 16px;
+    }
+
+    .faq-answer p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
     /* ─── Mobile ────────────────────────────────────────────── */
     @media (max-width: 900px) {
-      .hero-content { grid-template-columns: 1fr; }
-      .hero-visual { display: none; }
-      .features-grid { grid-template-columns: 1fr 1fr; }
-      .steps-grid { grid-template-columns: 1fr 1fr; }
-      .steps-grid::before { display: none; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
-      .t-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .problem-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .ai-flow {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .ai-flow::before {
+        display: none;
+      }
+
+      .steps-grid::before {
+        display: none;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .t-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .problem-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
     }
+
     @media (max-width: 600px) {
-      .features-grid { grid-template-columns: 1fr; }
-      .steps-grid { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- ═══ NAV ═══════════════════════════════════════════════════ -->
-<nav id="nav">
-  <div class="container nav-inner">
-    <a href="#" class="logo">
-      <div class="logo-icon">🛡️</div>
-      StatusGuard
-    </a>
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#howitworks">How It Works</a></li>
-      <li><a href="#compare">Compare</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-    </ul>
-    <div style="display:flex;gap:12px">
-      <a href="#" class="btn btn-ghost">Sign In</a>
-      <a href="#pricing" class="btn btn-primary">Get Protected →</a>
+  <!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+  <nav id="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">🛡️</div>
+        StatusGuard
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#howitworks">How It Works</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#compare">Compare</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+      <div style="display:flex;gap:12px">
+        <a href="#" class="btn btn-ghost">Sign In</a>
+        <a href="#pricing" class="btn btn-primary">Get Protected →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+      <div class="hero-grid"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-content">
+        <!-- Text -->
+        <div class="hero-text">
+          <div class="tag">🛡️ 2026 Protothon — Fisk University</div>
+          <h1 class="hero-h1">
+            Your <span class="gradient-text">Bureaucratic<br />Bodyguard</span><br />
+            for the Real World
+          </h1>
+          <p class="hero-sub">
+            StatusGuard is the first personal compliance platform for international students — turning visa anxiety into
+            data-driven autonomy. Know your status. Protect your future.
+          </p>
+          <div class="hero-actions">
+            <a href="#pricing" class="btn btn-primary" style="font-size:.95rem;padding:13px 28px">
+              Start Free Trial
+            </a>
+            <a href="#howitworks" class="btn btn-ghost" style="font-size:.95rem;padding:13px 24px">
+              See How It Works
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <strong class="gradient-text">89%</strong>
+              <span>Willingness to pay</span>
+            </div>
+            <div class="hero-stat">
+              <strong class="gradient-text">76%</strong>
+              <span>Report high stress</span>
+            </div>
+            <div class="hero-stat">
+              <strong class="gradient-text">58%</strong>
+              <span>Don't know expiry</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Mockup -->
+        <div class="hero-visual">
+          <div class="dashboard-card">
+            <svg width="0" height="0" style="position:absolute">
+              <defs>
+                <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#4f6cff" />
+                  <stop offset="100%" stop-color="#00d4ff" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <div class="dash-header">
+              <span class="dash-title">STATUSGUARD DASHBOARD</span>
+              <span class="status-badge status-green">✓ LOW RISK</span>
+            </div>
+
+            <div class="risk-score">
+              <div class="risk-ring">
+                <svg viewBox="0 0 120 120" width="120" height="120">
+                  <circle class="risk-ring-track" cx="60" cy="60" r="50" />
+                  <circle class="risk-ring-fill" cx="60" cy="60" r="50" />
+                </svg>
+                <div class="risk-number">
+                  <strong class="gradient-text">82</strong>
+                  <span>Risk Score</span>
+                </div>
+              </div>
+              <div class="risk-label">Compliance Health: Strong</div>
+            </div>
+
+            <div class="dash-items">
+              <div class="dash-item">
+                <div class="dash-icon" style="background:rgba(34,211,165,.12);color:var(--green)">📋</div>
+                <div class="dash-item-text">
+                  I-20 Valid Until
+                  <small>Dec 15, 2026 — 287 days left</small>
+                  <div class="mini-bar">
+                    <div class="mini-bar-fill"
+                      style="width:78%;background:linear-gradient(90deg,var(--green),var(--cyan))"></div>
+                  </div>
+                </div>
+                <span class="status-badge status-green" style="font-size:.65rem">OK</span>
+              </div>
+
+              <div class="dash-item">
+                <div class="dash-icon" style="background:rgba(255,186,0,.12);color:#ffba00">💰</div>
+                <div class="dash-item-text">
+                  Liquidity Buffer
+                  <small>$24,200 / $31,000 required</small>
+                  <div class="mini-bar">
+                    <div class="mini-bar-fill" style="width:62%;background:linear-gradient(90deg,#ffba00,#ff8c00)">
+                    </div>
+                  </div>
+                </div>
+                <span class="status-badge status-yellow" style="font-size:.65rem">⚠ LOW</span>
+              </div>
+
+              <div class="dash-item">
+                <div class="dash-icon" style="background:rgba(79,108,255,.12);color:var(--blue)">📍</div>
+                <div class="dash-item-text">
+                  Address Verified
+                  <small>Last reported 3 days ago</small>
+                  <div class="mini-bar">
+                    <div class="mini-bar-fill" style="width:95%"></div>
+                  </div>
+                </div>
+                <span class="status-badge status-green" style="font-size:.65rem">OK</span>
+              </div>
+
+              <div class="dash-item">
+                <div class="dash-icon" style="background:rgba(139,92,246,.12);color:var(--purple)">🎓</div>
+                <div class="dash-item-text">
+                  Enrollment Compliance
+                  <small>Attendance: 91% this semester</small>
+                  <div class="mini-bar">
+                    <div class="mini-bar-fill"
+                      style="width:91%;background:linear-gradient(90deg,var(--purple),var(--blue))"></div>
+                  </div>
+                </div>
+                <span class="status-badge status-green" style="font-size:.65rem">OK</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating cards -->
+          <div class="alert-float">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-title">Liquidity Alert</div>
+            <div class="alert-sub">Fund $6,800 more to stay DSO-ready. 18 days to report.</div>
+          </div>
+
+          <div class="stats-float">
+            <div class="sf-label">Emergency Shield</div>
+            <div class="sf-value">$2,500</div>
+            <div class="sf-label" style="margin-top:2px">Ready for legal fees</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TICKER ══════════════════════════════════════════════════ -->
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker">
+      <div class="ticker-item"><span class="dot"></span> 89% willingness to pay $15/mo</div>
+      <div class="ticker-item"><span class="dot"></span> 76% of students report high financial stress</div>
+      <div class="ticker-item"><span class="dot"></span> F-1 grace period cut from 60 → 30 days</div>
+      <div class="ticker-item"><span class="dot"></span> 58% don't know their exact I-20 expiry</div>
+      <div class="ticker-item"><span class="dot"></span> 34% missed the 10-day address reporting window</div>
+      <div class="ticker-item"><span class="dot"></span> $100K H-1B fee barrier for post-grads</div>
+      <div class="ticker-item"><span class="dot"></span> $38.2B personal finance app market in 2026</div>
+      <!-- duplicate for seamless loop -->
+      <div class="ticker-item"><span class="dot"></span> 89% willingness to pay $15/mo</div>
+      <div class="ticker-item"><span class="dot"></span> 76% of students report high financial stress</div>
+      <div class="ticker-item"><span class="dot"></span> F-1 grace period cut from 60 → 30 days</div>
+      <div class="ticker-item"><span class="dot"></span> 58% don't know their exact I-20 expiry</div>
+      <div class="ticker-item"><span class="dot"></span> 34% missed the 10-day address reporting window</div>
+      <div class="ticker-item"><span class="dot"></span> $100K H-1B fee barrier for post-grads</div>
+      <div class="ticker-item"><span class="dot"></span> $38.2B personal finance app market in 2026</div>
     </div>
   </div>
-</nav>
 
-<!-- ═══ HERO ═══════════════════════════════════════════════════ -->
-<section id="hero">
-  <div class="hero-bg">
-    <div class="hero-orb orb-1"></div>
-    <div class="hero-orb orb-2"></div>
-    <div class="hero-orb orb-3"></div>
-    <div class="hero-grid"></div>
-  </div>
+  <!-- ═══ PROBLEM ═══════════════════════════════════════════════ -->
+  <section id="problem">
+    <div class="container">
+      <div class="problem-grid">
+        <div class="reveal">
+          <div class="section-tag tag">⚡ The Problem</div>
+          <h2 class="section-title">
+            It's not about budgeting.<br />
+            It's about <span class="gradient-text-purple">survival</span>.
+          </h2>
+          <p class="section-sub" style="margin-bottom:32px">
+            For international students, a single missed deadline doesn't mean a late fee — it means losing your legal
+            right to be in the country. Existing apps don't understand this reality.
+          </p>
+          <div class="problem-cards">
+            <div class="problem-card reveal">
+              <div class="p-icon" style="background:rgba(255,78,106,.1)">🚨</div>
+              <div>
+                <h4>The "Fixed Admission" Trap</h4>
+                <p>DHS replaced "Duration of Status" with fixed periods. Students must now actively apply for extensions
+                  — turning passive residency into a ticking clock.</p>
+              </div>
+            </div>
+            <div class="problem-card reveal">
+              <div class="p-icon" style="background:rgba(255,186,0,.1)">📉</div>
+              <div>
+                <h4>Invisible Risk Scores</h4>
+                <p>Universities report attendance to SEVIS via platforms like SEAtS ONE. Students have zero visibility
+                  into the "risk score" filed on their behalf.</p>
+              </div>
+            </div>
+            <div class="problem-card reveal">
+              <div class="p-icon" style="background:rgba(79,108,255,.1)">💸</div>
+              <div>
+                <h4>Compliance Liquidity Failures</h4>
+                <p>BNPL debt and exchange rate swings can silently drop a student below I-20 financial requirements —
+                  triggering a "public charge" violation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div class="container">
-    <div class="hero-content">
-      <!-- Text -->
-      <div class="hero-text">
-        <div class="tag">🛡️ 2026 Protothon — Fisk University</div>
-        <h1 class="hero-h1">
-          Your <span class="gradient-text">Bureaucratic<br/>Bodyguard</span><br/>
-          for the Real World
-        </h1>
-        <p class="hero-sub">
-          StatusGuard is the first personal compliance platform for international students — turning visa anxiety into data-driven autonomy. Know your status. Protect your future.
+        <div class="reveal">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px">
+            <div
+              style="font-size:.78rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:24px">
+              Compliance Timeline — F-1 Student Journey</div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h4>Visa Issued</h4>
+                <p>I-20 program start. Grace period begins.</p>
+                <div class="t-meta" style="color:var(--green)">✓ Safe Zone</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" style="border-color:var(--cyan)"></div>
+                <h4>Semester Start</h4>
+                <p>Full-time enrollment required. Address must be registered within 10 days of any move.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" style="border-color:#ffba00"></div>
+                <h4>Mid-Year Check</h4>
+                <p>Bank balance and attendance are silently evaluated. No alerts sent to students.</p>
+                <div class="t-meta">⚠ Risk Window — 34% miss this</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" style="border-color:var(--purple)"></div>
+                <h4>Extension Application</h4>
+                <p>Under new rules, must apply 4 months before program end. Requires full financial proof.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" style="border-color:var(--red)"></div>
+                <h4>Grace Period End</h4>
+                <p>Now 30 days (reduced from 60). Unlawful presence begins immediately after.</p>
+                <div class="t-meta">🚨 High Failure Rate — most dangerous phase</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES ══════════════════════════════════════════════ -->
+  <section id="features">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="tag section-tag">✦ Features</div>
+        <h2 class="section-title">Everything a <span class="gradient-text">RegTech Shield</span> needs</h2>
+        <p class="section-sub">Three intelligent modules. One unified dashboard. Zero bureaucratic blind spots.</p>
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feat-card reveal" style="grid-column: span 1">
+          <div class="feat-icon" style="background:rgba(79,108,255,.12)">🔍</div>
+          <h3>Active SEVIS Mirror</h3>
+          <p>Cross-references your university portal's DSO view with your real-world data — address, enrollment, and
+            attendance — before the institution files anything to SEVIS.</p>
+          <span class="feat-tag">Address Loop</span>
+          <span class="feat-tag" style="margin-left:6px">Enrollment Loop</span>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon" style="background:rgba(34,211,165,.12)">💰</div>
+          <h3>Visa-at-Risk (VaR) Financial Dashboard</h3>
+          <p>Monitors liquid assets against your I-20 "Estimated Total Expenses." Warns about BNPL threats, credit card
+            spikes, and exchange rate dips before they become violations.</p>
+          <span class="feat-tag">Liquidity Buffer</span>
+          <span class="feat-tag" style="margin-left:6px">Burn Rate</span>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon" style="background:rgba(255,78,106,.12)">🛡️</div>
+          <h3>Deactivation Defense Insurance</h3>
+          <p>Partnered with IMG and WorldTrips to provide "Supplemental Status Insurance" — covering legal fees and
+            emergency repatriation if you receive a Notice of Intent to Terminate.</p>
+          <span class="feat-tag">Legal Coverage</span>
+          <span class="feat-tag" style="margin-left:6px">Flight Fund</span>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon" style="background:rgba(255,186,0,.12)">📋</div>
+          <h3>OCR Document Engine</h3>
+          <p>Snap a photo of your I-20 or I-94 and let AWS Textract automatically extract program end dates, admit-until
+            dates, and financial proof requirements — no manual entry ever.</p>
+          <span class="feat-tag">AWS Textract</span>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon" style="background:rgba(139,92,246,.12)">📱</div>
+          <h3>Haptic Compliance Streaks</h3>
+          <p>Gamified compliance milestones with haptic feedback. Earn streaks for address reporting, attendance
+            check-ins, and fund verifications. Gen Z–native UX, not boring form fields.</p>
+          <span class="feat-tag">Gamification</span>
+          <span class="feat-tag" style="margin-left:6px">Dark Mode</span>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon" style="background:rgba(0,212,255,.12)">🔒</div>
+          <h3>FERPA-Compliant Privacy Layer</h3>
+          <p>Your data is never shared with your university unless you explicitly trigger an "SOS" to your DSO. You own
+            your compliance data — the institution doesn't see it unless you choose.</p>
+          <span class="feat-tag">FERPA Compliant</span>
+          <span class="feat-tag" style="margin-left:6px">SOS Mode</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AI MONITORING ══════════════════════════════════════════ -->
+  <section id="ai-monitoring">
+    <div style="position:absolute;inset:0;pointer-events:none">
+      <div
+        style="position:absolute;width:500px;height:500px;top:20%;left:5%;background:radial-gradient(circle,rgba(0,212,255,.12),transparent);filter:blur(90px)">
+      </div>
+      <div
+        style="position:absolute;width:400px;height:400px;bottom:10%;right:10%;background:radial-gradient(circle,rgba(139,92,246,.12),transparent);filter:blur(90px)">
+      </div>
+    </div>
+
+    <div class="container" style="position:relative;z-index:2">
+      <div class="section-header center reveal">
+        <div class="tag section-tag">🤖 AI-Powered Intelligence</div>
+        <h2 class="section-title">Policy changes don't wait.<br />Neither does <span class="gradient-text">your AI
+            bodyguard</span>.</h2>
+        <p class="section-sub">While you sleep, our AI monitors federal regulations, analyzes impact on your specific
+          status, and delivers personalized briefings — all processed locally on your device.</p>
+      </div>
+
+      <div class="ai-flow">
+
+        <div class="ai-step reveal">
+          <div class="ai-step-icon">
+            <span class="ai-step-num">1</span>
+            📡
+          </div>
+          <h4>Active Horizon Scanning</h4>
+          <p>Our backend monitors the Federal Register 24/7. When a new DHS or USCIS rule is published, a "Policy Patch"
+            is sent to your device.</p>
+        </div>
+
+        <div class="ai-step reveal">
+          <div class="ai-step-icon">
+            <span class="ai-step-num">2</span>
+            🔍
+          </div>
+          <h4>Local Impact Audit</h4>
+          <p>Your phone's local AI compares the new rule against your specific I-20 and graduation date. It asks: "Does
+            this change your legal status?"</p>
+        </div>
+
+        <div class="ai-step reveal">
+          <div class="ai-step-icon">
+            <span class="ai-step-num">3</span>
+            💬
+          </div>
+          <h4>Autonomous Briefing</h4>
+          <p>Instead of a news headline, you get a briefing: "DHS just changed the grace period. This means you must
+            file your OPT by Oct 15 instead of Nov 15. Tap to update your calendar."</p>
+        </div>
+
+        <div class="ai-step reveal">
+          <div class="ai-step-icon">
+            <span class="ai-step-num">4</span>
+            🔐
+          </div>
+          <h4>Zero-Data Feedback</h4>
+          <p>The analysis happens entirely on your chip. We know a rule changed, but we never know how it affects you
+            specifically.</p>
+        </div>
+
+      </div>
+
+      <div class="ai-highlight-box reveal">
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center">
+          <div
+            style="width:80px;height:80px;border-radius:16px;background:linear-gradient(135deg,var(--cyan),var(--blue));display:flex;align-items:center;justify-content:center;font-size:2.5rem;flex-shrink:0">
+            ⚡
+          </div>
+          <div>
+            <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:12px">
+              <span class="gradient-text">On-Device AI Processing</span> — Privacy by Design
+            </h3>
+            <p style="color:var(--muted);font-size:.95rem;line-height:1.75;margin-bottom:16px">
+              Unlike cloud-based compliance tools that upload your documents and personal data to remote servers,
+              StatusGuard runs all AI analysis locally on your device using advanced on-device machine learning models.
+              Your I-20, visa status, and personal circumstances never leave your phone.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <span class="feat-tag" style="background:rgba(0,212,255,.15);color:var(--cyan)">Edge AI</span>
+              <span class="feat-tag" style="background:rgba(0,212,255,.15);color:var(--cyan)">Zero Cloud Upload</span>
+              <span class="feat-tag" style="background:rgba(0,212,255,.15);color:var(--cyan)">Real-Time Analysis</span>
+              <span class="feat-tag" style="background:rgba(0,212,255,.15);color:var(--cyan)">Privacy First</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:48px;text-align:center" class="reveal">
+        <div
+          style="display:inline-flex;align-items:center;gap:20px;background:rgba(79,108,255,.08);border:1px solid var(--border);border-radius:16px;padding:20px 32px">
+          <div style="font-size:2rem">🧠</div>
+          <div style="text-align:left">
+            <div style="font-weight:700;font-size:1.05rem;margin-bottom:4px">Powered by Advanced NLP Models</div>
+            <div style="font-size:.85rem;color:var(--muted)">Trained on 15+ years of immigration policy changes and
+              SEVIS compliance data</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ══════════════════════════════════════════ -->
+  <section id="howitworks">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="tag section-tag">⚙ How It Works</div>
+        <h2 class="section-title">From setup to <span class="gradient-text">fully shielded</span> in 4 steps</h2>
+        <p class="section-sub">StatusGuard's "Resilience Stack" runs in the background while you focus on your degree.
         </p>
-        <div class="hero-actions">
-          <a href="#pricing" class="btn btn-primary" style="font-size:.95rem;padding:13px 28px">
-            Start Free Trial
-          </a>
-          <a href="#howitworks" class="btn btn-ghost" style="font-size:.95rem;padding:13px 24px">
-            See How It Works
-          </a>
+      </div>
+
+      <div class="steps-grid" style="margin-bottom:80px">
+        <div class="step reveal">
+          <div class="step-num">📄</div>
+          <h4>1. Upload Your I-20</h4>
+          <p>Our OCR engine parses your document and sets up your compliance calendar instantly. No manual entry.</p>
         </div>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <strong class="gradient-text">89%</strong>
-            <span>Willingness to pay</span>
-          </div>
-          <div class="hero-stat">
-            <strong class="gradient-text">76%</strong>
-            <span>Report high stress</span>
-          </div>
-          <div class="hero-stat">
-            <strong class="gradient-text">58%</strong>
-            <span>Don't know expiry</span>
-          </div>
+        <div class="step reveal">
+          <div class="step-num">🏦</div>
+          <h4>2. Link Your Bank</h4>
+          <p>Connect via Plaid. We monitor your liquidity against I-20 financial requirements in real time.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">🔄</div>
+          <h4>3. Sync University Portal</h4>
+          <p>We mirror your DSO's view — attendance, enrollment, address — and alert you before they do.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">🛡️</div>
+          <h4>4. Stay Protected</h4>
+          <p>Get haptic alerts, automated reminders, and a real-time compliance score. Your bureaucratic bodyguard never
+            sleeps.</p>
         </div>
       </div>
 
-      <!-- Dashboard Mockup -->
-      <div class="hero-visual">
-        <div class="dashboard-card">
-          <svg width="0" height="0" style="position:absolute">
-            <defs>
-              <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#4f6cff"/>
-                <stop offset="100%" stop-color="#00d4ff"/>
-              </linearGradient>
-            </defs>
-          </svg>
-
-          <div class="dash-header">
-            <span class="dash-title">STATUSGUARD DASHBOARD</span>
-            <span class="status-badge status-green">✓ LOW RISK</span>
-          </div>
-
-          <div class="risk-score">
-            <div class="risk-ring">
-              <svg viewBox="0 0 120 120" width="120" height="120">
-                <circle class="risk-ring-track" cx="60" cy="60" r="50"/>
-                <circle class="risk-ring-fill" cx="60" cy="60" r="50"/>
-              </svg>
-              <div class="risk-number">
-                <strong class="gradient-text">82</strong>
-                <span>Risk Score</span>
-              </div>
-            </div>
-            <div class="risk-label">Compliance Health: Strong</div>
-          </div>
-
-          <div class="dash-items">
-            <div class="dash-item">
-              <div class="dash-icon" style="background:rgba(34,211,165,.12);color:var(--green)">📋</div>
-              <div class="dash-item-text">
-                I-20 Valid Until
-                <small>Dec 15, 2026 — 287 days left</small>
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:78%;background:linear-gradient(90deg,var(--green),var(--cyan))"></div></div>
-              </div>
-              <span class="status-badge status-green" style="font-size:.65rem">OK</span>
-            </div>
-
-            <div class="dash-item">
-              <div class="dash-icon" style="background:rgba(255,186,0,.12);color:#ffba00">💰</div>
-              <div class="dash-item-text">
-                Liquidity Buffer
-                <small>$24,200 / $31,000 required</small>
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:62%;background:linear-gradient(90deg,#ffba00,#ff8c00)"></div></div>
-              </div>
-              <span class="status-badge status-yellow" style="font-size:.65rem">⚠ LOW</span>
-            </div>
-
-            <div class="dash-item">
-              <div class="dash-icon" style="background:rgba(79,108,255,.12);color:var(--blue)">📍</div>
-              <div class="dash-item-text">
-                Address Verified
-                <small>Last reported 3 days ago</small>
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:95%"></div></div>
-              </div>
-              <span class="status-badge status-green" style="font-size:.65rem">OK</span>
-            </div>
-
-            <div class="dash-item">
-              <div class="dash-icon" style="background:rgba(139,92,246,.12);color:var(--purple)">🎓</div>
-              <div class="dash-item-text">
-                Enrollment Compliance
-                <small>Attendance: 91% this semester</small>
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:91%;background:linear-gradient(90deg,var(--purple),var(--blue))"></div></div>
-              </div>
-              <span class="status-badge status-green" style="font-size:.65rem">OK</span>
-            </div>
-          </div>
+      <!-- Architecture callout -->
+      <div class="reveal"
+        style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;text-align:center">
+        <div>
+          <div style="font-size:2rem;margin-bottom:12px">⚛️</div>
+          <div style="font-weight:700;margin-bottom:6px">React Native</div>
+          <div style="font-size:.82rem;color:var(--muted)">Mobile-first, haptic-driven interface built for the Gen Z
+            user</div>
         </div>
-
-        <!-- Floating cards -->
-        <div class="alert-float">
-          <div class="alert-icon">⚠️</div>
-          <div class="alert-title">Liquidity Alert</div>
-          <div class="alert-sub">Fund $6,800 more to stay DSO-ready. 18 days to report.</div>
+        <div style="border-left:1px solid var(--border);border-right:1px solid var(--border)">
+          <div style="font-size:2rem;margin-bottom:12px">🔎</div>
+          <div style="font-weight:700;margin-bottom:6px">Local OCR</div>
+          <div style="font-size:.82rem;color:var(--muted)">OCR-powered document parsing for I-20, I-94, and DS-2019
+            forms</div>
         </div>
-
-        <div class="stats-float">
-          <div class="sf-label">Emergency Shield</div>
-          <div class="sf-value">$2,500</div>
-          <div class="sf-label" style="margin-top:2px">Ready for legal fees</div>
+        <div>
+          <div style="font-size:2rem;margin-bottom:12px">⚖️</div>
+          <div style="font-weight:700;margin-bottom:6px">Regulatory Rule Engine</div>
+          <div style="font-size:.82rem;color:var(--muted)">Real-time updates as DHS grace periods and USCIS rules change
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ TICKER ══════════════════════════════════════════════════ -->
-<div class="ticker-wrap">
-  <div class="ticker-track" id="ticker">
-    <div class="ticker-item"><span class="dot"></span> 89% willingness to pay $15/mo</div>
-    <div class="ticker-item"><span class="dot"></span> 76% of students report high financial stress</div>
-    <div class="ticker-item"><span class="dot"></span> F-1 grace period cut from 60 → 30 days</div>
-    <div class="ticker-item"><span class="dot"></span> 58% don't know their exact I-20 expiry</div>
-    <div class="ticker-item"><span class="dot"></span> 34% missed the 10-day address reporting window</div>
-    <div class="ticker-item"><span class="dot"></span> $100K H-1B fee barrier for post-grads</div>
-    <div class="ticker-item"><span class="dot"></span> $38.2B personal finance app market in 2026</div>
-    <!-- duplicate for seamless loop -->
-    <div class="ticker-item"><span class="dot"></span> 89% willingness to pay $15/mo</div>
-    <div class="ticker-item"><span class="dot"></span> 76% of students report high financial stress</div>
-    <div class="ticker-item"><span class="dot"></span> F-1 grace period cut from 60 → 30 days</div>
-    <div class="ticker-item"><span class="dot"></span> 58% don't know their exact I-20 expiry</div>
-    <div class="ticker-item"><span class="dot"></span> 34% missed the 10-day address reporting window</div>
-    <div class="ticker-item"><span class="dot"></span> $100K H-1B fee barrier for post-grads</div>
-    <div class="ticker-item"><span class="dot"></span> $38.2B personal finance app market in 2026</div>
-  </div>
-</div>
+  <!-- ═══ SECURITY ═══════════════════════════════════════════════ -->
+  <section id="security" style="background:var(--navy);position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;pointer-events:none">
+      <div
+        style="position:absolute;width:400px;height:400px;top:50%;left:10%;transform:translateY(-50%);background:radial-gradient(circle,rgba(34,211,165,.15),transparent);filter:blur(80px)">
+      </div>
+      <div
+        style="position:absolute;width:350px;height:350px;top:20%;right:15%;background:radial-gradient(circle,rgba(79,108,255,.12),transparent);filter:blur(80px)">
+      </div>
+    </div>
 
-<!-- ═══ PROBLEM ═══════════════════════════════════════════════ -->
-<section id="problem">
-  <div class="container">
-    <div class="problem-grid">
-      <div class="reveal">
-        <div class="section-tag tag">⚡ The Problem</div>
-        <h2 class="section-title">
-          It's not about budgeting.<br/>
-          It's about <span class="gradient-text-purple">survival</span>.
-        </h2>
-        <p class="section-sub" style="margin-bottom:32px">
-          For international students, a single missed deadline doesn't mean a late fee — it means losing your legal right to be in the country. Existing apps don't understand this reality.
+    <div class="container" style="position:relative;z-index:2">
+      <div class="section-header center reveal">
+        <div class="tag section-tag">🔒 Security & Privacy</div>
+        <h2 class="section-title">Your data stays <span class="gradient-text">yours</span>. Always.</h2>
+        <p class="section-sub">Your data is as important as your visa status — and we take that responsibility just as
+          seriously.
         </p>
-        <div class="problem-cards">
-          <div class="problem-card reveal">
-            <div class="p-icon" style="background:rgba(255,78,106,.1)">🚨</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:48px">
+
+        <div class="feat-card reveal" style="background:rgba(34,211,165,.05);border-color:rgba(34,211,165,.2)">
+          <div class="feat-icon" style="background:rgba(34,211,165,.15);color:var(--green)">🖥️</div>
+          <h3>100% Local OCR Processing</h3>
+          <p>Your I-20, I-94, and visa documents never leave your device. All OCR processing happens locally on your
+            phone using on-device machine learning — no cloud uploads, no third-party servers, no data exposure.</p>
+          <span class="feat-tag" style="background:rgba(34,211,165,.15);color:var(--green)">On-Device ML</span>
+          <span class="feat-tag" style="margin-left:6px;background:rgba(34,211,165,.15);color:var(--green)">Zero Cloud
+            Upload</span>
+        </div>
+
+        <div class="feat-card reveal" style="background:rgba(79,108,255,.05);border-color:rgba(79,108,255,.2)">
+          <div class="feat-icon" style="background:rgba(79,108,255,.15);color:var(--blue)">🔐</div>
+          <h3>End-to-End Encryption</h3>
+          <p>All sensitive data is encrypted at rest using AES-256 and in transit using TLS 1.3. Your compliance
+            records, financial data, and personal information are cryptographically secured with keys only you control.
+          </p>
+          <span class="feat-tag" style="background:rgba(79,108,255,.15);color:var(--blue)">AES-256</span>
+          <span class="feat-tag" style="margin-left:6px;background:rgba(79,108,255,.15);color:var(--blue)">TLS
+            1.3</span>
+        </div>
+
+        <div class="feat-card reveal" style="background:rgba(139,92,246,.05);border-color:rgba(139,92,246,.2)">
+          <div class="feat-icon" style="background:rgba(139,92,246,.15);color:var(--purple)">👤</div>
+          <h3>FERPA-Compliant Privacy</h3>
+          <p>Your educational records are protected under FERPA regulations. We never share your data with your
+            university, DSO, or any third party without your explicit consent. You control who sees what, when.</p>
+          <span class="feat-tag" style="background:rgba(139,92,246,.15);color:var(--purple)">FERPA Certified</span>
+          <span class="feat-tag" style="margin-left:6px;background:rgba(139,92,246,.15);color:var(--purple)">User
+            Consent</span>
+        </div>
+
+        <div class="feat-card reveal" style="background:rgba(0,212,255,.05);border-color:rgba(0,212,255,.2)">
+          <div class="feat-icon" style="background:rgba(0,212,255,.15);color:var(--cyan)">🛡️</div>
+          <h3>Bank-Grade Security</h3>
+          <p>Financial connections use Plaid's secure infrastructure with read-only access. We never store your banking
+            credentials, and you can revoke access instantly. SOC 2 Type II compliant infrastructure.</p>
+          <span class="feat-tag" style="background:rgba(0,212,255,.15);color:var(--cyan)">Plaid Secure</span>
+          <span class="feat-tag" style="margin-left:6px;background:rgba(0,212,255,.15);color:var(--cyan)">SOC 2 Type
+            II</span>
+        </div>
+
+      </div>
+
+      <div class="reveal"
+        style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;text-align:center">
+        <div style="display:inline-flex;align-items:center;gap:16px;margin-bottom:20px">
+          <div
+            style="width:48px;height:48px;border-radius:12px;background:rgba(34,211,165,.12);display:flex;align-items:center;justify-content:center;font-size:1.5rem">
+            ✓</div>
+          <div style="text-align:left">
+            <div style="font-weight:700;font-size:1.1rem;margin-bottom:4px">Privacy-First Architecture</div>
+            <div style="font-size:.85rem;color:var(--muted)">No cloud processing • No data mining • No third-party
+              tracking</div>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:.9rem;max-width:700px;margin:0 auto;line-height:1.7">
+          Unlike other compliance tools that upload your sensitive documents to cloud servers for processing,
+          StatusGuard performs all OCR and document analysis directly on your device. Your visa documents, financial
+          records, and personal information never leave your control.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ══════════════════════════════════════════════════ -->
+  <section id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal" style="transition-delay:.0s">
+          <div class="stat-number" data-target="89">0</div>
+          <p>Willingness to pay $15/mo for compliance peace of mind</p>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:.1s">
+          <div class="stat-number" data-target="76">0</div>
+          <p>Of international students report high financial stress</p>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:.2s">
+          <div class="stat-number" data-target="500" data-suffix="+">0</div>
+          <p>Students surveyed across Boston, NY, LA, Nashville</p>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:.3s">
+          <div class="stat-number" data-target="38" data-prefix="$" data-suffix="B">0</div>
+          <p>Personal finance app market size in 2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COMPARE ════════════════════════════════════════════════ -->
+  <section id="compare">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="tag section-tag">⚡ Comparison</div>
+        <h2 class="section-title">StatusGuard vs. <span class="gradient-text">everyone else</span></h2>
+        <p class="section-sub">Other tools catch you when you fail. We prevent the failure entirely.</p>
+      </div>
+
+      <div class="compare-wrap reveal">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Budgeting Apps<br /><small style="font-weight:400;text-transform:none;letter-spacing:0">(Mint,
+                  YNAB)</small></th>
+              <th>Case Trackers<br /><small
+                  style="font-weight:400;text-transform:none;letter-spacing:0">(Lawfully)</small></th>
+              <th>Uni Admin<br /><small style="font-weight:400;text-transform:none;letter-spacing:0">(Terra
+                  Dotta)</small></th>
+              <th class="highlight">StatusGuard</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Real-time SEVIS mirroring</td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">Inst. only</span></td>
+              <td class="highlight"><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Compliance liquidity monitoring</td>
+              <td><span class="partial">Budgets only</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+              <td class="highlight"><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>I-20 document parsing (OCR)</td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">Partial</span></td>
+              <td><span class="check">✓</span></td>
+              <td class="highlight"><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Address reporting automation</td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+              <td class="highlight"><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Attendance compliance alerts</td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">Inst. side only</span></td>
+              <td class="highlight"><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Deactivation insurance</td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+              <td class="highlight"><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Student-side data control (FERPA)</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td class="highlight"><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Gen Z–native UX / Haptics</td>
+              <td><span class="partial">Partial</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+              <td class="highlight"><span class="check">✓</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRICING ════════════════════════════════════════════════ -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="tag section-tag">💳 Pricing</div>
+        <h2 class="section-title">One shield. <span class="gradient-text">Any budget.</span></h2>
+        <p class="section-sub">Less than a Netflix subscription to protect a $200,000 educational investment.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Free -->
+        <div class="price-card reveal">
+          <div class="price-name">Shield Lite</div>
+          <div class="price-amount">$0</div>
+          <div class="price-period">Forever free</div>
+          <ul class="price-features">
+            <li><span class="check">✓</span> I-20 date tracking</li>
+            <li><span class="check">✓</span> Basic expiry reminders</li>
+            <li><span class="check">✓</span> 3 compliance alerts/month</li>
+            <li><span class="cross">✗</span> Bank API monitoring</li>
+            <li><span class="cross">✗</span> SEVIS mirror</li>
+            <li><span class="cross">✗</span> Deactivation insurance</li>
+          </ul>
+          <a href="#" class="btn btn-ghost btn-full">Get Started</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="price-card popular reveal">
+          <div class="popular-badge">MOST POPULAR</div>
+          <div class="price-name">Shield Pro</div>
+          <div class="price-amount gradient-text">$15</div>
+          <div class="price-period">per month · billed monthly</div>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Everything in Lite</li>
+            <li><span class="check">✓</span> Bank API liquidity monitoring</li>
+            <li><span class="check">✓</span> Active SEVIS mirroring</li>
+            <li><span class="check">✓</span> Attendance sync (Canvas/Blackboard)</li>
+            <li><span class="check">✓</span> Address reporting automation</li>
+            <li><span class="check">✓</span> Unlimited compliance alerts</li>
+          </ul>
+          <a href="#" class="btn btn-primary btn-full">Start 14-Day Free Trial</a>
+        </div>
+
+        <!-- Family -->
+        <div class="price-card reveal">
+          <div class="price-name">Family Shield</div>
+          <div class="price-amount">$35</div>
+          <div class="price-period">per month · up to 3 students</div>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Everything in Pro</li>
+            <li><span class="check">✓</span> Deactivation defense insurance</li>
+            <li><span class="check">✓</span> Emergency legal fee coverage ($2,500)</li>
+            <li><span class="check">✓</span> Emergency flight fund HYSA</li>
+            <li><span class="check">✓</span> Priority DSO SOS escalation</li>
+            <li><span class="check">✓</span> Family compliance dashboard</li>
+          </ul>
+          <a href="#" class="btn btn-ghost btn-full">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS ══════════════════════════════════════════ -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="tag section-tag">💬 Testimonials</div>
+        <h2 class="section-title">Students who <span class="gradient-text">sleep better</span></h2>
+      </div>
+
+      <div class="t-grid">
+        <div class="t-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="t-text">"I had no idea my bank balance was close to dropping below my I-20 requirement. StatusGuard
+            caught it 3 weeks before my DSO review. It literally saved my visa."</p>
+          <div class="t-author">
+            <div class="t-avatar">A</div>
             <div>
-              <h4>The "Fixed Admission" Trap</h4>
-              <p>DHS replaced "Duration of Status" with fixed periods. Students must now actively apply for extensions — turning passive residency into a ticking clock.</p>
+              <div class="t-name">Aisha M.</div>
+              <div class="t-role">F-1 Student · Vanderbilt University · Nigeria</div>
             </div>
           </div>
-          <div class="problem-card reveal">
-            <div class="p-icon" style="background:rgba(255,186,0,.1)">📉</div>
+        </div>
+
+        <div class="t-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="t-text">"The address loop feature is the one thing I didn't know I needed. I moved and completely
+            forgot the 10-day rule. StatusGuard sent me a reminder on day 2."</p>
+          <div class="t-author">
+            <div class="t-avatar">K</div>
             <div>
-              <h4>Invisible Risk Scores</h4>
-              <p>Universities report attendance to SEVIS via platforms like SEAtS ONE. Students have zero visibility into the "risk score" filed on their behalf.</p>
+              <div class="t-name">Kai T.</div>
+              <div class="t-role">F-1 Student · NYU · South Korea</div>
             </div>
           </div>
-          <div class="problem-card reveal">
-            <div class="p-icon" style="background:rgba(79,108,255,.1)">💸</div>
+        </div>
+
+        <div class="t-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="t-text">"My parents pay $48K/year for my education. $15/month for StatusGuard feels like the most
+            obvious insurance we've ever bought. No other app understood our situation."</p>
+          <div class="t-author">
+            <div class="t-avatar">P</div>
             <div>
-              <h4>Compliance Liquidity Failures</h4>
-              <p>BNPL debt and exchange rate swings can silently drop a student below I-20 financial requirements — triggering a "public charge" violation.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="reveal">
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px">
-          <div style="font-size:.78rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:24px">Compliance Timeline — F-1 Student Journey</div>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <h4>Visa Issued</h4>
-              <p>I-20 program start. Grace period begins.</p>
-              <div class="t-meta" style="color:var(--green)">✓ Safe Zone</div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot" style="border-color:var(--cyan)"></div>
-              <h4>Semester Start</h4>
-              <p>Full-time enrollment required. Address must be registered within 10 days of any move.</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot" style="border-color:#ffba00"></div>
-              <h4>Mid-Year Check</h4>
-              <p>Bank balance and attendance are silently evaluated. No alerts sent to students.</p>
-              <div class="t-meta">⚠ Risk Window — 34% miss this</div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot" style="border-color:var(--purple)"></div>
-              <h4>Extension Application</h4>
-              <p>Under new rules, must apply 4 months before program end. Requires full financial proof.</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot" style="border-color:var(--red)"></div>
-              <h4>Grace Period End</h4>
-              <p>Now 30 days (reduced from 60). Unlawful presence begins immediately after.</p>
-              <div class="t-meta">🚨 High Failure Rate — most dangerous phase</div>
+              <div class="t-name">Priya S.</div>
+              <div class="t-role">F-1 Student · Boston University · India</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ FEATURES ══════════════════════════════════════════════ -->
-<section id="features">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="tag section-tag">✦ Features</div>
-      <h2 class="section-title">Everything a <span class="gradient-text">RegTech Shield</span> needs</h2>
-      <p class="section-sub">Three intelligent modules. One unified dashboard. Zero bureaucratic blind spots.</p>
-    </div>
-
-    <div class="features-grid">
-
-      <div class="feat-card reveal" style="grid-column: span 1">
-        <div class="feat-icon" style="background:rgba(79,108,255,.12)">🔍</div>
-        <h3>Active SEVIS Mirror</h3>
-        <p>Cross-references your university portal's DSO view with your real-world data — address, enrollment, and attendance — before the institution files anything to SEVIS.</p>
-        <span class="feat-tag">Address Loop</span>
-        <span class="feat-tag" style="margin-left:6px">Enrollment Loop</span>
+  <!-- ═══ FAQ ════════════════════════════════════════════════════ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="tag section-tag">❓ FAQ</div>
+        <h2 class="section-title">Questions? <span class="gradient-text">We've got answers.</span></h2>
+        <p class="section-sub">Everything you need to know about StatusGuard, compliance monitoring, and protecting your
+          visa status.</p>
       </div>
 
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(34,211,165,.12)">💰</div>
-        <h3>Visa-at-Risk (VaR) Financial Dashboard</h3>
-        <p>Monitors liquid assets against your I-20 "Estimated Total Expenses." Warns about BNPL threats, credit card spikes, and exchange rate dips before they become violations.</p>
-        <span class="feat-tag">Liquidity Buffer</span>
-        <span class="feat-tag" style="margin-left:6px">Burn Rate</span>
-      </div>
+      <div class="faq-grid">
 
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(255,78,106,.12)">🛡️</div>
-        <h3>Deactivation Defense Insurance</h3>
-        <p>Partnered with IMG and WorldTrips to provide "Supplemental Status Insurance" — covering legal fees and emergency repatriation if you receive a Notice of Intent to Terminate.</p>
-        <span class="feat-tag">Legal Coverage</span>
-        <span class="feat-tag" style="margin-left:6px">Flight Fund</span>
-      </div>
-
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(255,186,0,.12)">📋</div>
-        <h3>OCR Document Engine</h3>
-        <p>Snap a photo of your I-20 or I-94 and let AWS Textract automatically extract program end dates, admit-until dates, and financial proof requirements — no manual entry ever.</p>
-        <span class="feat-tag">AWS Textract</span>
-      </div>
-
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(139,92,246,.12)">📱</div>
-        <h3>Haptic Compliance Streaks</h3>
-        <p>Gamified compliance milestones with haptic feedback. Earn streaks for address reporting, attendance check-ins, and fund verifications. Gen Z–native UX, not boring form fields.</p>
-        <span class="feat-tag">Gamification</span>
-        <span class="feat-tag" style="margin-left:6px">Dark Mode</span>
-      </div>
-
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(0,212,255,.12)">🔒</div>
-        <h3>FERPA-Compliant Privacy Layer</h3>
-        <p>Your data is never shared with your university unless you explicitly trigger an "SOS" to your DSO. You own your compliance data — the institution doesn't see it unless you choose.</p>
-        <span class="feat-tag">FERPA Compliant</span>
-        <span class="feat-tag" style="margin-left:6px">SOS Mode</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══ HOW IT WORKS ══════════════════════════════════════════ -->
-<section id="howitworks">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="tag section-tag">⚙ How It Works</div>
-      <h2 class="section-title">From setup to <span class="gradient-text">fully shielded</span> in 4 steps</h2>
-      <p class="section-sub">StatusGuard's "Resilience Stack" runs in the background while you focus on your degree.</p>
-    </div>
-
-    <div class="steps-grid" style="margin-bottom:80px">
-      <div class="step reveal">
-        <div class="step-num">📄</div>
-        <h4>1. Upload Your I-20</h4>
-        <p>Our OCR engine parses your document and sets up your compliance calendar instantly. No manual entry.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">🏦</div>
-        <h4>2. Link Your Bank</h4>
-        <p>Connect via Plaid. We monitor your liquidity against I-20 financial requirements in real time.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">🔄</div>
-        <h4>3. Sync University Portal</h4>
-        <p>We mirror your DSO's view — attendance, enrollment, address — and alert you before they do.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">🛡️</div>
-        <h4>4. Stay Protected</h4>
-        <p>Get haptic alerts, automated reminders, and a real-time compliance score. Your bureaucratic bodyguard never sleeps.</p>
-      </div>
-    </div>
-
-    <!-- Architecture callout -->
-    <div class="reveal" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;text-align:center">
-      <div>
-        <div style="font-size:2rem;margin-bottom:12px">⚛️</div>
-        <div style="font-weight:700;margin-bottom:6px">React Native</div>
-        <div style="font-size:.82rem;color:var(--muted)">Mobile-first, haptic-driven interface built for the Gen Z user</div>
-      </div>
-      <div style="border-left:1px solid var(--border);border-right:1px solid var(--border)">
-        <div style="font-size:2rem;margin-bottom:12px">🔎</div>
-        <div style="font-weight:700;margin-bottom:6px">AWS Textract</div>
-        <div style="font-size:.82rem;color:var(--muted)">OCR-powered document parsing for I-20, I-94, and DS-2019 forms</div>
-      </div>
-      <div>
-        <div style="font-size:2rem;margin-bottom:12px">⚖️</div>
-        <div style="font-weight:700;margin-bottom:6px">Regulatory Rule Engine</div>
-        <div style="font-size:.82rem;color:var(--muted)">Real-time updates as DHS grace periods and USCIS rules change</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ STATS ══════════════════════════════════════════════════ -->
-<section id="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item reveal" style="transition-delay:.0s">
-        <div class="stat-number" data-target="89">0</div>
-        <p>Willingness to pay $15/mo for compliance peace of mind</p>
-      </div>
-      <div class="stat-item reveal" style="transition-delay:.1s">
-        <div class="stat-number" data-target="76">0</div>
-        <p>Of international students report high financial stress</p>
-      </div>
-      <div class="stat-item reveal" style="transition-delay:.2s">
-        <div class="stat-number" data-target="500" data-suffix="+">0</div>
-        <p>Students surveyed across Boston, NY, LA, Nashville</p>
-      </div>
-      <div class="stat-item reveal" style="transition-delay:.3s">
-        <div class="stat-number" data-target="38" data-prefix="$" data-suffix="B">0</div>
-        <p>Personal finance app market size in 2026</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ COMPARE ════════════════════════════════════════════════ -->
-<section id="compare">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="tag section-tag">⚡ Comparison</div>
-      <h2 class="section-title">StatusGuard vs. <span class="gradient-text">everyone else</span></h2>
-      <p class="section-sub">Other tools catch you when you fail. We prevent the failure entirely.</p>
-    </div>
-
-    <div class="compare-wrap reveal">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Budgeting Apps<br/><small style="font-weight:400;text-transform:none;letter-spacing:0">(Mint, YNAB)</small></th>
-            <th>Case Trackers<br/><small style="font-weight:400;text-transform:none;letter-spacing:0">(Lawfully)</small></th>
-            <th>Uni Admin<br/><small style="font-weight:400;text-transform:none;letter-spacing:0">(Terra Dotta)</small></th>
-            <th class="highlight">StatusGuard</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Real-time SEVIS mirroring</td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="partial">Inst. only</span></td>
-            <td class="highlight"><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td>Compliance liquidity monitoring</td>
-            <td><span class="partial">Budgets only</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td class="highlight"><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td>I-20 document parsing (OCR)</td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="partial">Partial</span></td>
-            <td><span class="check">✓</span></td>
-            <td class="highlight"><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td>Address reporting automation</td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td class="highlight"><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td>Attendance compliance alerts</td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="partial">Inst. side only</span></td>
-            <td class="highlight"><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td>Deactivation insurance</td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td class="highlight"><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td>Student-side data control (FERPA)</td>
-            <td><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td class="highlight"><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td>Gen Z–native UX / Haptics</td>
-            <td><span class="partial">Partial</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td class="highlight"><span class="check">✓</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PRICING ════════════════════════════════════════════════ -->
-<section id="pricing">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="tag section-tag">💳 Pricing</div>
-      <h2 class="section-title">One shield. <span class="gradient-text">Any budget.</span></h2>
-      <p class="section-sub">Less than a Netflix subscription to protect a $200,000 educational investment.</p>
-    </div>
-
-    <div class="pricing-grid">
-      <!-- Free -->
-      <div class="price-card reveal">
-        <div class="price-name">Shield Lite</div>
-        <div class="price-amount">$0</div>
-        <div class="price-period">Forever free</div>
-        <ul class="price-features">
-          <li><span class="check">✓</span> I-20 date tracking</li>
-          <li><span class="check">✓</span> Basic expiry reminders</li>
-          <li><span class="check">✓</span> 3 compliance alerts/month</li>
-          <li><span class="cross">✗</span> Bank API monitoring</li>
-          <li><span class="cross">✗</span> SEVIS mirror</li>
-          <li><span class="cross">✗</span> Deactivation insurance</li>
-        </ul>
-        <a href="#" class="btn btn-ghost btn-full">Get Started</a>
-      </div>
-
-      <!-- Pro -->
-      <div class="price-card popular reveal">
-        <div class="popular-badge">MOST POPULAR</div>
-        <div class="price-name">Shield Pro</div>
-        <div class="price-amount gradient-text">$15</div>
-        <div class="price-period">per month · billed monthly</div>
-        <ul class="price-features">
-          <li><span class="check">✓</span> Everything in Lite</li>
-          <li><span class="check">✓</span> Bank API liquidity monitoring</li>
-          <li><span class="check">✓</span> Active SEVIS mirroring</li>
-          <li><span class="check">✓</span> Attendance sync (Canvas/Blackboard)</li>
-          <li><span class="check">✓</span> Address reporting automation</li>
-          <li><span class="check">✓</span> Unlimited compliance alerts</li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-full">Start 14-Day Free Trial</a>
-      </div>
-
-      <!-- Family -->
-      <div class="price-card reveal">
-        <div class="price-name">Family Shield</div>
-        <div class="price-amount">$35</div>
-        <div class="price-period">per month · up to 3 students</div>
-        <ul class="price-features">
-          <li><span class="check">✓</span> Everything in Pro</li>
-          <li><span class="check">✓</span> Deactivation defense insurance</li>
-          <li><span class="check">✓</span> Emergency legal fee coverage ($2,500)</li>
-          <li><span class="check">✓</span> Emergency flight fund HYSA</li>
-          <li><span class="check">✓</span> Priority DSO SOS escalation</li>
-          <li><span class="check">✓</span> Family compliance dashboard</li>
-        </ul>
-        <a href="#" class="btn btn-ghost btn-full">Contact Sales</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TESTIMONIALS ══════════════════════════════════════════ -->
-<section id="testimonials">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="tag section-tag">💬 Testimonials</div>
-      <h2 class="section-title">Students who <span class="gradient-text">sleep better</span></h2>
-    </div>
-
-    <div class="t-grid">
-      <div class="t-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="t-text">"I had no idea my bank balance was close to dropping below my I-20 requirement. StatusGuard caught it 3 weeks before my DSO review. It literally saved my visa."</p>
-        <div class="t-author">
-          <div class="t-avatar">A</div>
-          <div>
-            <div class="t-name">Aisha M.</div>
-            <div class="t-role">F-1 Student · Vanderbilt University · Nigeria</div>
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h4>How is StatusGuard different from my DSO or university portal?</h4>
+            <div class="faq-icon">▼</div>
+          </div>
+          <div class="faq-answer">
+            <p>Your DSO sees your data after it's already filed to SEVIS — often too late to fix issues. StatusGuard
+              mirrors that view in real-time and alerts you before problems are reported. Think of it as your early
+              warning system, not a replacement for your DSO.</p>
           </div>
         </div>
-      </div>
 
-      <div class="t-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="t-text">"The address loop feature is the one thing I didn't know I needed. I moved and completely forgot the 10-day rule. StatusGuard sent me a reminder on day 2."</p>
-        <div class="t-author">
-          <div class="t-avatar">K</div>
-          <div>
-            <div class="t-name">Kai T.</div>
-            <div class="t-role">F-1 Student · NYU · South Korea</div>
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h4>Is my visa and financial data actually safe?</h4>
+            <div class="faq-icon">▼</div>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely. All OCR processing happens locally on your device — your I-20 and visa documents never leave
+              your phone. Financial data is encrypted with AES-256, and we use Plaid's bank-grade security. We're
+              FERPA-compliant and SOC 2 Type II certified.</p>
           </div>
         </div>
-      </div>
 
-      <div class="t-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="t-text">"My parents pay $48K/year for my education. $15/month for StatusGuard feels like the most obvious insurance we've ever bought. No other app understood our situation."</p>
-        <div class="t-author">
-          <div class="t-avatar">P</div>
-          <div>
-            <div class="t-name">Priya S.</div>
-            <div class="t-role">F-1 Student · Boston University · India</div>
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h4>What happens if I miss a compliance deadline?</h4>
+            <div class="faq-icon">▼</div>
+          </div>
+          <div class="faq-answer">
+            <p>StatusGuard sends escalating alerts via push notifications, SMS, and email. If you're on the Premium plan
+              with Deactivation Defense Insurance, you'll have access to emergency legal support and repatriation
+              coverage if a violation occurs.</p>
           </div>
         </div>
+
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h4>Does StatusGuard work with all universities?</h4>
+            <div class="faq-icon">▼</div>
+          </div>
+          <div class="faq-answer">
+            <p>Yes. We integrate with major student information systems like Terra Dotta, Sunapsis, and iStart. If your
+              university uses a custom portal, you can manually sync your data or upload documents via our OCR engine.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h4>Can I use this for OPT or CPT tracking?</h4>
+            <div class="faq-icon">▼</div>
+          </div>
+          <div class="faq-answer">
+            <p>Currently, StatusGuard focuses on F-1 student status compliance. OPT/CPT tracking and H-1B transition
+              planning are on our roadmap for Q3 2026. Join our waitlist to get early access when these features launch.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h4>What if my bank isn't supported by Plaid?</h4>
+            <div class="faq-icon">▼</div>
+          </div>
+          <div class="faq-answer">
+            <p>You can manually enter your balance and update it weekly. We'll still monitor your liquidity against I-20
+              requirements and send alerts. Plaid supports 12,000+ institutions, including most international
+              student-friendly banks.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h4>Will my university know I'm using StatusGuard?</h4>
+            <div class="faq-icon">▼</div>
+          </div>
+          <div class="faq-answer">
+            <p>No. Your data is private and FERPA-protected. We never share information with your university unless you
+              explicitly trigger the "SOS Mode" to alert your DSO about an urgent compliance issue.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h4>Can I cancel anytime?</h4>
+            <div class="faq-icon">▼</div>
+          </div>
+          <div class="faq-answer">
+            <p>Yes. No contracts, no cancellation fees. You can downgrade to the free tier or cancel completely from
+              your account settings. Your data will be securely deleted within 30 days per GDPR requirements.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="reveal" style="text-align:center;margin-top:48px">
+        <p style="color:var(--muted);font-size:.9rem;margin-bottom:20px">Still have questions?</p>
+        <a href="mailto:support@statusguard.app" class="btn btn-ghost">Contact Support →</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ CTA ════════════════════════════════════════════════════ -->
-<section id="cta">
-  <div class="cta-orb cta-orb-1"></div>
-  <div class="cta-orb cta-orb-2"></div>
-  <div class="container">
-    <div class="cta-inner reveal">
-      <div class="tag" style="margin:0 auto 24px">🛡️ Start Today</div>
-      <h2>Stop managing fear.<br/><span class="gradient-text">Start managing data.</span></h2>
-      <p>Join thousands of international students who've turned bureaucratic anxiety into administrative confidence. Your visa is your most valuable asset — guard it.</p>
-      <div class="cta-actions">
-        <a href="#pricing" class="btn btn-primary" style="font-size:1rem;padding:14px 32px">
-          Get Protected Free →
-        </a>
-        <a href="#features" class="btn btn-ghost" style="font-size:1rem;padding:14px 28px">
-          Explore Features
-        </a>
+  <!-- ═══ CTA ════════════════════════════════════════════════════ -->
+  <section id="cta">
+    <div class="cta-orb cta-orb-1"></div>
+    <div class="cta-orb cta-orb-2"></div>
+    <div class="container">
+      <div class="cta-inner reveal">
+        <div class="tag" style="margin:0 auto 24px">🛡️ Start Today</div>
+        <h2>Stop managing fear.<br /><span class="gradient-text">Start managing data.</span></h2>
+        <p>Join thousands of international students who've turned bureaucratic anxiety into administrative confidence.
+          Your visa is your most valuable asset — guard it.</p>
+        <div class="cta-actions">
+          <a href="#pricing" class="btn btn-primary" style="font-size:1rem;padding:14px 32px">
+            Get Protected Free →
+          </a>
+          <a href="#features" class="btn btn-ghost" style="font-size:1rem;padding:14px 28px">
+            Explore Features
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ FOOTER ════════════════════════════════════════════════ -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="logo" style="margin-bottom:12px;display:inline-flex">
-          <div class="logo-icon">🛡️</div>
-          StatusGuard
-        </a>
-        <p>The first personal compliance platform for international students. Turning visa anxiety into data-driven autonomy since 2026.</p>
-        <div style="margin-top:20px;display:flex;gap:12px">
-          <a href="#" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#4f6cff'" onmouseout="this.style.color='var(--muted)'">Twitter</a>
-          <a href="#" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#4f6cff'" onmouseout="this.style.color='var(--muted)'">LinkedIn</a>
-          <a href="#" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#4f6cff'" onmouseout="this.style.color='var(--muted)'">Instagram</a>
+  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo" style="margin-bottom:12px;display:inline-flex">
+            <div class="logo-icon">🛡️</div>
+            StatusGuard
+          </a>
+          <p>The first personal compliance platform for international students. Turning visa anxiety into data-driven
+            autonomy since 2026.</p>
+          <div style="margin-top:20px;display:flex;gap:12px">
+            <a href="#" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s"
+              onmouseover="this.style.color='#4f6cff'" onmouseout="this.style.color='var(--muted)'">Twitter</a>
+            <a href="#" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s"
+              onmouseover="this.style.color='#4f6cff'" onmouseout="this.style.color='var(--muted)'">LinkedIn</a>
+            <a href="#" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s"
+              onmouseover="this.style.color='#4f6cff'" onmouseout="this.style.color='var(--muted)'">Instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Product</h5>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#compare">Compare</a>
+          <a href="#">Changelog</a>
+        </div>
+
+        <div class="footer-col">
+          <h5>Legal</h5>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">FERPA Compliance</a>
+          <a href="#">Data Security</a>
+        </div>
+
+        <div class="footer-col">
+          <h5>Resources</h5>
+          <a href="#">F-1 Visa Guide</a>
+          <a href="#">SEVIS Explained</a>
+          <a href="#">I-20 Handbook</a>
+          <a href="#">Blog</a>
         </div>
       </div>
 
-      <div class="footer-col">
-        <h5>Product</h5>
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#compare">Compare</a>
-        <a href="#">Changelog</a>
-      </div>
-
-      <div class="footer-col">
-        <h5>Legal</h5>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">FERPA Compliance</a>
-        <a href="#">Data Security</a>
-      </div>
-
-      <div class="footer-col">
-        <h5>Resources</h5>
-        <a href="#">F-1 Visa Guide</a>
-        <a href="#">SEVIS Explained</a>
-        <a href="#">I-20 Handbook</a>
-        <a href="#">Blog</a>
+      <div class="footer-bottom">
+        <span>© 2026 StatusGuard Inc. — Built for the 2026 Fisk University Protothon</span>
+        <span>Protecting over <strong style="color:var(--blue)">1,000,000</strong> international students</span>
       </div>
     </div>
+  </footer>
 
-    <div class="footer-bottom">
-      <span>© 2026 StatusGuard Inc. — Built for the 2026 Fisk University Protothon</span>
-      <span>Protecting over <strong style="color:var(--blue)">1,000,000</strong> international students</span>
-    </div>
-  </div>
-</footer>
+  <!-- ═══ SCRIPTS ════════════════════════════════════════════════ -->
+  <script>
+    // ── Scroll Reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => revealObserver.observe(el));
 
-<!-- ═══ SCRIPTS ════════════════════════════════════════════════ -->
-<script>
-  // ── Scroll Reveal ──
-  const reveals = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+    // ── Nav scroll effect ──
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => revealObserver.observe(el));
 
-  // ── Nav scroll effect ──
-  window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
-  });
+    // ── Counter animation ──
+    function animateCounter(el, target, prefix = '', suffix = '') {
+      let start = 0;
+      const duration = 1800;
+      const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = prefix + Math.floor(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
 
-  // ── Counter animation ──
-  function animateCounter(el, target, prefix = '', suffix = '') {
-    let start = 0;
-    const duration = 1800;
-    const step = (timestamp) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = prefix + Math.floor(eased * target) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
-
-  const statNumbers = document.querySelectorAll('.stat-number[data-target]');
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !entry.target.dataset.animated) {
-        entry.target.dataset.animated = 'true';
-        const target = parseInt(entry.target.dataset.target);
-        const prefix = entry.target.dataset.prefix || '';
-        const suffix = entry.target.dataset.suffix || '%';
-        animateCounter(entry.target, target, prefix, suffix);
-      }
-    });
-  }, { threshold: 0.5 });
-  statNumbers.forEach(el => counterObserver.observe(el));
-
-  // ── Ripple button effect ──
-  document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      const ripple = document.createElement('span');
-      ripple.className = 'ripple-effect';
-      const rect = btn.getBoundingClientRect();
-      ripple.style.left = (e.clientX - rect.left - 40) + 'px';
-      ripple.style.top = (e.clientY - rect.top - 40) + 'px';
-      btn.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 600);
-    });
-  });
-
-  // ── Ring animation ──
-  const ringFill = document.querySelector('.risk-ring-fill');
-  if (ringFill) {
-    const ringObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        ringFill.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.4,0,0.2,1)';
-        ringFill.style.strokeDashoffset = '60';
-      }
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          entry.target.dataset.animated = 'true';
+          const target = parseInt(entry.target.dataset.target);
+          const prefix = entry.target.dataset.prefix || '';
+          const suffix = entry.target.dataset.suffix || '%';
+          animateCounter(entry.target, target, prefix, suffix);
+        }
+      });
     }, { threshold: 0.5 });
-    const heroSection = document.getElementById('hero');
-    if (heroSection) ringObserver.observe(heroSection);
-  }
+    statNumbers.forEach(el => counterObserver.observe(el));
 
-  // ── Smooth anchor scrolling ──
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    // ── Ripple button effect ──
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple-effect';
+        const rect = btn.getBoundingClientRect();
+        ripple.style.left = (e.clientX - rect.left - 40) + 'px';
+        ripple.style.top = (e.clientY - rect.top - 40) + 'px';
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
     });
-  });
 
-  // ── Feat card stagger ──
-  document.querySelectorAll('.feat-card').forEach((card, i) => {
-    card.style.transitionDelay = (i * 0.08) + 's';
-  });
+    // ── Ring animation ──
+    const ringFill = document.querySelector('.risk-ring-fill');
+    if (ringFill) {
+      const ringObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          ringFill.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.4,0,0.2,1)';
+          ringFill.style.strokeDashoffset = '60';
+        }
+      }, { threshold: 0.5 });
+      const heroSection = document.getElementById('hero');
+      if (heroSection) ringObserver.observe(heroSection);
+    }
 
-  // ── Dashboard mini-bar animate ──
-  const bars = document.querySelectorAll('.mini-bar-fill');
-  bars.forEach(bar => {
-    const width = bar.style.width;
-    bar.style.width = '0';
-    bar.style.transition = 'width 1.2s cubic-bezier(0.4,0,0.2,1) .8s';
-    setTimeout(() => bar.style.width = width, 100);
-  });
-</script>
+    // ── Smooth anchor scrolling ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── Feat card stagger ──
+    document.querySelectorAll('.feat-card').forEach((card, i) => {
+      card.style.transitionDelay = (i * 0.08) + 's';
+    });
+
+    // ── Dashboard mini-bar animate ──
+    const bars = document.querySelectorAll('.mini-bar-fill');
+    bars.forEach(bar => {
+      const width = bar.style.width;
+      bar.style.width = '0';
+      bar.style.transition = 'width 1.2s cubic-bezier(0.4,0,0.2,1) .8s';
+      setTimeout(() => bar.style.width = width, 100);
+    });
+
+    // ── FAQ Accordion ──
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        // Close all other FAQ items
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+          }
+        });
+
+        // Toggle current item
+        item.classList.toggle('active', !isActive);
+      });
+    });
+  </script>
 
 </body>
+
 </html>
